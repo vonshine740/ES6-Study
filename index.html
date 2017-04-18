@@ -13,6 +13,22 @@
     <script type="text/javascript">
         "use strict";
         <!-- Proxy -->
+        const target = {
+            a: 'a',
+            b: 'b'
+        };
+        cosnt handler = {
+            get( target, key, receiver ){
+                console.log( 'arguments: ' );
+                console.log( arguments );
+//                return Reflect.get( target, key, receiver );
+                return 23;
+            },
+            set(target, key, receiver){
+                console.log( arguments );
+                return Reflect.set( target, key, receiver );
+            }
+        };
         var proxy = new Proxy({
             a: 'a',
             b: 'b'
@@ -20,7 +36,12 @@
             get: function( target, key, receiver ){
                 console.log( 'arguments: ' );
                 console.log( arguments );
-                return Reflect.get( target, key, receiver );
+//                return Reflect.get( target, key, receiver );
+                return 23;
+            },
+            set(target, key, receiver){
+                console.log( arguments );
+                return Reflect.set( target, key, receiver );
             }
         });
         console.log( proxy.a );
